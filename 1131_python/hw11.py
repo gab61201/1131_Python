@@ -16,8 +16,8 @@ def total_price(book:dict)->int:  # 傳入書本dict，回傳計算完的總價
         return ceil(price*book['sales'][2]/100)
 
 if __name__ == '__main__':
-    book_list = [new_book('A',380), new_book('B',1200), new_book('C',180)]  # 建立一個含有多個書本dict的list
-    book_list = sorted(book_list, key=total_price, reverse=True)  # 以書本的總價排列list
-    for book in book_list:
-        print(f'{book["name"]},{total_price(book)}')
-    print(sum([total_price(book) for book in book_list]))
+    all_books = new_book('A', 380), new_book('B', 1200), new_book('C', 180)  # 建立一個含有多個書本dict的tuple
+    all_books = sorted(all_books, key=total_price, reverse=True)  # 以書本的總價排列
+    for book in all_books:
+        print(book['name'], total_price(book), sep=',')
+    print(sum(total_price(book) for book in all_books))
