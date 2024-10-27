@@ -25,7 +25,7 @@ def main():
     elif graph == 2:
         triangle(rows)
     elif graph == 3:
-            revTriangle(rows)
+        revTriangle(rows)
 
 if __name__ == '__main__':
     main()
