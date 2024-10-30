@@ -10,12 +10,13 @@ def new_course()->dict:
             raise Exception
     return course_dict
 
-def conflict(courses:list): 
+def conflict(courses:list):
     conflictList = list()
     for index_1, course_1 in enumerate(courses):
         for course_2 in courses[index_1+1:]:
             lessonSet = course_1['lessons'] & course_2['lessons']
-            conflictList.extend([f'{course_1["name"]},{course_2["name"]},{lesson}' for lesson in lessonSet])
+            conflictLessons = [f'{course_1["name"]},{course_2["name"]},{lesson}' for lesson in lessonSet]
+            conflictList.extend(conflictLessons)
     for output in conflictList or ['correct']:
         print(output)
         

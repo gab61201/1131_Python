@@ -1,33 +1,12 @@
-def matrix(n:int)->list:
-    matr = list()
-    for row in range(0, n**2, n):
-        matr.append([i+row+1 for i in range(n)])
-    return matr
-
-def turn_left(matr:list):
-    output = list()
-    for i in range(-1, -len(matr)-1, -1):
-        output.append([m[i] for m in matr])
-    return output
-
-def turn_right(matr:list):
-    output = list()
-    for i in range(len(matr)):
-        output.append([matr[m-1][i] for m in range(len(matr), 0, -1)])
-    return output
-
 def main():
-    mat = matrix(int(input()))
-    turns = input()
-    for t in turns:
-        if t == 'L':
-            mat = turn_left(mat)
-        elif t == 'R':
-            mat = turn_right(mat)
-    for row in mat:
-        for i in row:
-            print(i, end=' ')
+    n, turn = int(input()), input()
+    turn = turn.count('R')-turn.count('L')
+    for i in range(n):
+        row_type = [range(1+i*n, 1+i*n +n, 1),#右轉0次
+                    range(n**2-(n-i-1), i, -n),#右轉1次
+                    range((n-i)*n, (n-i)*n -n, -1),#右轉2次
+                    range(n-i, n**2-i+1, n)]#右轉3次
+        for element in row_type[turn % 4]:
+            print(element, end=' ')
         print()
-
-if __name__ == '__main__':
-    main()
+main()

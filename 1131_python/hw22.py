@@ -1,7 +1,6 @@
-def cards()->list:
+def cards(input_cards)->list:
     card_num = ['A'] + [str(i) for i in range(2,11)] + ['J', 'Q', 'K']
     card_face = ['S', 'H', 'D', 'C']
-    input_cards = input().split()
     card_seq, card_type = [], []
     for card in input_cards:
         if card[:-1] in card_num and card[-1] in card_face:
@@ -39,9 +38,18 @@ def cardType(card_seq: list, card_type: list):
     return 1
 
 def main():
-    card_seq, card_type = cards()
-    if card_seq and card_type:
-        print(cardType(card_seq, card_type))
+    output_list = []
+    for _ in range(int(input())):
+        card = input().split()
+        player = card.pop(0)
+        card_seq, card_type = cards(card)
+        if card_seq and card_type:
+            output_list.append([player, cardType(card_seq, card_type)])
+        else:
+            return
+    output_list = sorted(output_list, key=lambda x: x[1], reverse=True)
+    for line in output_list:
+        print(line[0], line[1])
 
 if __name__ == '__main__':
     main()
